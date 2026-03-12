@@ -1,1 +1,2 @@
 # easy-nvim
+# easy-nvim
