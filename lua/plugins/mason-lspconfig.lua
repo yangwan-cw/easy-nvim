@@ -13,6 +13,8 @@ return {
           "pyright",
           "ts_ls",
           "clangd",
+          "gopls",
+          "jdtls",
         },
         automatic_installation = true,
       })

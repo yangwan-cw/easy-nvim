@@ -7,7 +7,7 @@ return {
     "nvim-tree/nvim-web-devicons",
     "MunifTanjim/nui.nvim",
   },
-  cmd = "Neotree",
+  lazy = false,
   keys = {
     {
       "<leader>e",
@@ -40,6 +40,13 @@ return {
         },
       },
     })
+
+    vim.api.nvim_create_autocmd("VimEnter", {
+      callback = function()
+        vim.schedule(function()
+          vim.cmd("Neotree show filesystem reveal left")
+        end)
+      end,
+    })
   end,
 }
-

@@ -4,7 +4,7 @@ require("lazy").setup({
   require("plugins.neo-tree"),
   require("plugins.lualine"),
   require("plugins.bufferline"),
-  require("plugins.telescope"),
+  require("plugins.snacks"),
   require("plugins.treesitter"),
   require("plugins.mason"),
   require("plugins.dashboard"),
@@ -13,5 +13,7 @@ require("lazy").setup({
   require("plugins.cmp"),
   require("plugins.indent-blankline"),
   require("plugins.autopairs"),
+  require("plugins.comment"),
+  require("plugins.neogen"),
+  require("plugins.codecompanion"),
 })
-

@@ -4,13 +4,13 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "hrsh7th/cmp-nvim-lsp",
+      "saghen/blink.cmp",
     },
     config = function()
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      local ok, cmp_lsp = pcall(require, "cmp_nvim_lsp")
+      local ok, blink = pcall(require, "blink.cmp")
       if ok then
-        capabilities = cmp_lsp.default_capabilities(capabilities)
+        capabilities = blink.get_lsp_capabilities(capabilities)
       end
 
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -30,8 +30,8 @@ return {
             vim.lsp.buf.format({ async = true })
           end, "LSP: Format")
           map("n", "<leader>e", vim.diagnostic.open_float, "LSP: Diagnostic float")
-          map("n", "[d", vim.diagnostic.goto_prev, "LSP: Prev diagnostic")
-          map("n", "]d", vim.diagnostic.goto_next, "LSP: Next diagnostic")
+          map("n", "<leader>k", vim.diagnostic.goto_prev, "LSP: Prev diagnostic")
+          map("n", "<leader>j", vim.diagnostic.goto_next, "LSP: Next diagnostic")
         end,
       })
 
@@ -51,7 +51,15 @@ return {
         },
       })
 
-      vim.lsp.enable({ "clangd", "lua_ls", "pyright", "ts_ls" })
+      vim.lsp.config("jdtls", {
+        cmd = { "/opt/homebrew/bin/jdtls" },
+        cmd_env = {
+          JAVA_HOME = "/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home",
+          PATH = vim.env.PATH,
+        },
+      })
+
+      vim.lsp.enable({ "clangd", "gopls", "jdtls", "lua_ls", "pyright", "ts_ls" })
     end,
   },
 }
